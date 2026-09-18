@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fifth Dimension Holds the Most Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0C16;
+    --bg-panel: #12162A;
+    --bg-panel-2: #171C33;
+    --line: #262B45;
+    --line-soft: #1B2038;
+    --text: #EDEBF5;
+    --text-muted: #9A9AB5;
+    --text-dim: #6B6E88;
+    --gold: #E8B94A;
+    --gold-dim: #7A6B3A;
+    --violet: #7C86FF;
+    --violet-dim: #3A3E73;
+    --cyan: #5FD0C7;
+    --cyan-dim: #2F6B66;
+  }
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #FAF7F0;
+      --bg-panel: #FFFFFF;
+      --bg-panel-2: #F1ECDF;
+      --line: #DDD5C0;
+      --line-soft: #E9E3D3;
+      --text: #211E30;
+      --text-muted: #5B5770;
+      --text-dim: #8B87A0;
+      --gold: #B8862F;
+      --gold-dim: #D8C193;
+      --violet: #4A4FBF;
+      --cyan: #1F8E84;
+      --cyan-dim: #BFE6E1;
+      --violet-dim: #C7C9F0;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #FAF7F0;
+    --bg-panel: #FFFFFF;
+    --bg-panel-2: #F1ECDF;
+    --line: #DDD5C0;
+    --line-soft: #E9E3D3;
+    --text: #211E30;
+    --text-muted: #5B5770;
+    --text-dim: #8B87A0;
+    --gold: #B8862F;
+    --gold-dim: #D8C193;
+    --violet: #4A4FBF;
+    --violet-dim: #C7C9F0;
+    --cyan: #1F8E84;
+    --cyan-dim: #BFE6E1;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+  }
+  body {
+    font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+    font-optical-sizing: auto;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  section {
+    padding: 0 24px;
+  }
+  #chapter1, #chapter2 {
+    scroll-margin-top: 52px;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .wrap-wide {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 64px;
+    padding-bottom: 48px;
+    position: relative;
+  }
+  .hero .rings {
+    width: min(340px, 70vw);
+    height: min(340px, 70vw);
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    margin: 0 0 20px;
+    max-width: 13ch;
+  }
+  .hero p.lede {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+  .hero .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+  .scroll-cue {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .scroll-cue .stem {
+    width: 1px;
+    height: 26px;
+    background: linear-gradient(var(--text-dim), transparent);
+    animation: stem-pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes stem-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* ---------- Prose sections ---------- */
+  .section {
+    padding-top: 96px;
+    padding-bottom: 96px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .eyebrow-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 22px;
+    max-width: 20ch;
+  }
+  p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 68ch;
+  }
+  p + p { margin-top: 1.1em; }
+  strong { color: var(--text); font-weight: 600; }
+
+  .formula-block {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin: 28px 0;
+    overflow-x: auto;
+  }
+  .formula-block.highlight {
+    border-color: var(--gold-dim);
+    background: linear-gradient(180deg, var(--bg-panel), var(--bg-panel-2));
+  }
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(1rem, 2.4vw, 1.3rem);
+    color: var(--text);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+  }
+  .formula-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-top: 14px;
+  }
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 0.2em;
+    line-height: 1.15;
+  }
+  .frac .num {
+    padding: 0 2px 2px;
+    border-bottom: 1.4px solid currentColor;
+  }
+  .frac .den {
+    padding: 2px 2px 0;
+  }
+  .approx {
+    color: var(--gold);
+  }
+
+  .step-list {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    counter-reset: step;
+  }
+  .step-list li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .step-list li:first-child { border-top: none; }
+  .step-list li::before {
+    content: counter(step);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--gold);
+    padding-top: 2px;
+  }
+  .step-list p { margin: 0; font-size: 1rem; }
+  .step-list .formula { font-size: 1.05rem; margin-top: 6px; white-space: normal; flex-wrap: wrap; }
+
+  /* ---------- Interactive curve ---------- */
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 28px;
+    margin-top: 20px;
+  }
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .panel-head .title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .readout {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .readout .stat-label {
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    text-transform: none;
+    margin-bottom: 4px;
+  }
+  .readout .stat-value {
+    font-size: 1.25rem;
+    color: var(--gold);
+  }
+  .readout .stat-value.alt { color: var(--violet); }
+
+  .chart-wrap { width: 100%; overflow-x: auto; }
+  svg.chart { width: 100%; height: auto; display: block; }
+  .axis-line { stroke: var(--line); stroke-width: 1; }
+  .axis-label { fill: var(--text-dim); font-family: 'IBM Plex Mono', monospace; font-size: 10px; }
+  .grid-line { stroke: var(--line-soft); stroke-width: 1; }
+  .curve-path {
+    fill: none;
+    stroke: var(--violet);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+  .curve-fill { fill: url(#curveGradient); opacity: 0.5; }
+  .tracker-dot {
+    fill: var(--gold);
+    stroke: var(--bg-panel);
+    stroke-width: 2;
+  }
+  .tracker-line {
+    stroke: var(--gold);
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    opacity: 0.6;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    background: var(--line);
+    margin: 18px 0 6px;
+    border-radius: 2px;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    cursor: pointer;
+    border: 3px solid var(--bg-panel);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    cursor: pointer;
+    border: 3px solid var(--bg-panel);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  /* ---------- Dimension bar chart ---------- */
+  .bar {
+    fill: var(--violet-dim);
+    transition: fill 0.3s ease;
+  }
+  .bar.peak {
+    fill: var(--gold);
+  }
+  .bar-label, .bar-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    fill: var(--text-dim);
+  }
+  .bar-value.peak-text { fill: var(--gold); }
+
+  .legend-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 16px;
+  }
+  .legend-swatch {
+    width: 10px; height: 10px; border-radius: 2px; background: var(--gold);
+    display: inline-block;
+  }
+
+  footer {
+    padding: 48px 24px 64px;
+    text-align: center;
+    border-top: 1px solid var(--line-soft);
+  }
+  footer p {
+    margin: 0 auto;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 560px) {
+    .section { padding-top: 64px; padding-bottom: 64px; }
+    .formula-block { padding: 20px 18px; }
+    .readout { gap: 20px; }
+    .panel { padding: 20px 18px; }
+    .wormhole-panel { padding: 22px 16px; }
+    section { padding: 0 16px; }
+    .chapter-divider { padding: 56px 16px; min-height: 56vh; }
+  }
+
+  @media (max-width: 480px) {
+    .chapternav { gap: 14px; padding: 10px 12px; font-size: 0.64rem; }
+    .hero { padding-top: 78px; }
+    .formula { font-size: 0.92rem; }
+    .axis-label { font-size: 13px; }
+    .bar-label, .bar-value { font-size: 13px; }
+    .wh-label { font-size: 14px; }
+    input[type="range"] { height: 4px; }
+    input[type="range"]::-webkit-slider-thumb { width: 22px; height: 22px; border-width: 4px; }
+    input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-width: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  /* ---------- Chapter nav ---------- */
+  .chapternav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 14px 20px;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.01em;
+  }
+  .chapternav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 4px 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .chapternav a:hover, .chapternav a:focus-visible { color: var(--text); }
+  .chapternav a.c1 { border-color: transparent; }
+  .chapternav a.c2 { border-color: transparent; }
+  .nav-short { display: none; }
+  @media (max-width: 480px) {
+    .nav-full { display: none; }
+    .nav-short { display: inline; }
+  }
+
+  /* ---------- Chapter divider ---------- */
+  .chapter-divider {
+    min-height: 62vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .chapter-divider .chapter-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--cyan);
+    margin-bottom: 18px;
+  }
+  .chapter-divider h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0 0 20px;
+    max-width: 16ch;
+  }
+  .chapter-divider p.lede {
+    font-size: clamp(1.02rem, 2vw, 1.18rem);
+    color: var(--text-muted);
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  /* accent variants for chapter two */
+  .accent-cyan { color: var(--cyan) !important; }
+  .formula-block.highlight-cyan {
+    border-color: var(--cyan-dim);
+    background: linear-gradient(180deg, var(--bg-panel), var(--bg-panel-2));
+  }
+  .step-list.cyan li::before { color: var(--cyan); }
+  .panel .title.cyan-title { color: var(--text-muted); }
+  .legend-swatch.cyan { background: var(--cyan); }
+  .callout {
+    border-left: 2px solid var(--cyan-dim);
+    padding: 4px 0 4px 18px;
+    margin: 24px 0;
+  }
+  .callout p { font-size: 0.98rem; margin: 0; }
+  .callout .callout-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--cyan);
+    margin-bottom: 8px;
+  }
+
+  /* ---------- Wormhole diagram ---------- */
+  .wormhole-panel { padding: 32px 28px; }
+  svg.wormhole { width: 100%; height: auto; display: block; }
+  .wh-throat {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 1.6;
+    opacity: 0.55;
+    animation: whBreathe 3.6s ease-in-out infinite;
+  }
+  @keyframes whBreathe {
+    0%, 100% { opacity: 0.35; stroke-width: 1.4px; }
+    50% { opacity: 0.85; stroke-width: 2.2px; }
+  }
+  .wh-cone {
+    fill: color-mix(in srgb, var(--cyan) 7%, transparent);
+    stroke: var(--line);
+    stroke-width: 1.2;
+  }
+  .wh-dot {
+    fill: var(--gold);
+    animation: whFlash 3.6s ease-in-out infinite;
+  }
+  @keyframes whFlash {
+    0%, 40% { opacity: 0.55; r: 5; }
+    48% { opacity: 1; r: 8; }
+    56%, 100% { opacity: 0.55; r: 5; }
+  }
+  .wh-glow {
+    fill: var(--gold);
+    opacity: 0;
+    animation: whGlowPulse 3.6s ease-in-out infinite;
+  }
+  @keyframes whGlowPulse {
+    0%, 40% { opacity: 0; r: 8; }
+    48% { opacity: 0.28; r: 22; }
+    56%, 100% { opacity: 0; r: 8; }
+  }
+  .wh-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    fill: var(--text-dim);
+  }
+  .wh-caption {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 14px;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ---------- Entanglement dial demo ---------- */
+  svg.entangle-demo { width: 100%; height: auto; display: block; }
+  .dial-ring { fill: none; stroke: var(--line); stroke-width: 1.2; }
+  .dial-hub { fill: var(--text-dim); }
+  .dial-needle {
+    stroke: var(--violet);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transform-origin: 0 0;
+  }
+  .dial-glow {
+    fill: var(--gold);
+    opacity: 0;
+  }
+  .dial-glow.flash {
+    animation: dialFlash 0.7s ease-out;
+  }
+  @keyframes dialFlash {
+    0% { opacity: 0.9; r: 4; }
+    100% { opacity: 0; r: 16; }
+  }
+
+  /* ---------- Proper-time curve demo ---------- */
+  svg.timegap-chart { width: 100%; height: auto; display: block; }
+  .tg-curve { fill: none; stroke: var(--cyan); stroke-width: 2.5; stroke-linecap: round; }
+  .tg-dot { fill: var(--gold); stroke: var(--bg-panel); stroke-width: 2; }
+  .tg-dot-glow { fill: var(--gold); opacity: 0.25; }
+</style>
+</head>
+<body>
+
+<nav class="chapternav">
+  <a href="#chapter1" class="c1"><span class="nav-full">I. The Fifth Dimension</span><span class="nav-short">I. Volume</span></a>
+  <a href="#chapter2" class="c2"><span class="nav-full">II. Entanglement's Shortcut</span><span class="nav-short">II. Entangle.</span></a>
+</nav>
+
+<section class="hero" id="chapter1">
+  <svg class="rings" viewBox="0 0 300 300" aria-hidden="true">
+    <circle cx="150" cy="150" r="30" fill="none" stroke="var(--line)" stroke-width="1.4"/>
+    <circle cx="150" cy="150" r="60" fill="none" stroke="var(--line)" stroke-width="1.4"/>
+    <circle cx="150" cy="150" r="90" fill="none" stroke="var(--line)" stroke-width="1.4"/>
+    <circle cx="150" cy="150" r="120" fill="none" stroke="var(--line)" stroke-width="1.4"/>
+    <g id="ringDraw">
+      <circle class="ring" data-r="30" cx="150" cy="150" r="30" fill="none" stroke="var(--violet-dim)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle class="ring" data-r="60" cx="150" cy="150" r="60" fill="none" stroke="var(--violet-dim)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle class="ring" data-r="90" cx="150" cy="150" r="90" fill="none" stroke="var(--violet-dim)" stroke-width="1.6" stroke-linecap="round"/>
+      <circle class="ring" data-r="120" cx="150" cy="150" r="120" fill="none" stroke="var(--violet)" stroke-width="2" stroke-linecap="round"/>
+      <circle id="ringFive" data-r="145" cx="150" cy="150" r="145" fill="none" stroke="var(--gold)" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+    <circle cx="150" cy="150" r="4" fill="var(--gold)"/>
+  </svg>
+  <div class="tag mono">CHAPTER ONE: FIVE DIMENSIONS, ONE MAXIMUM</div>
+  <h1>The fifth dimension holds the most room a sphere ever will.</h1>
+  <p class="lede">Give a ball of radius 1 more dimensions, one, two, up past ten, and its volume grows, then shrinks, forever after. The peak sits at exactly five, out of every dimension there is. Here is the formula behind that peak, built from scratch, animated, and explained.</p>
+  <div class="scroll-cue"><span>scroll</span><span class="stem"></span></div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow-num mono">01</div>
+    <h2>What "volume" means past three dimensions</h2>
+    <p>A disk is the set of points within radius <em>r</em> of a center, in a flat plane. A ball is the same idea in space: every point within <em>r</em> of a center. Nothing stops the definition there. An <strong>n-ball</strong> is every point within <em>r</em> of a center in n-dimensional space, and it has a well-defined n-dimensional volume, even though nobody can picture five directions at once.</p>
+    <p>The general formula for that volume is one of the more elegant results in geometry. It holds for every whole number n, and it is built from two familiar ingredients: <strong>π</strong> and the <strong>Gamma function</strong>, the smooth curve that extends factorials to non-whole numbers.</p>
+    <div class="formula-block">
+      <div class="formula">
+        V<sub>n</sub>(r)&nbsp;=&nbsp;
+        <span class="frac"><span class="num">π<sup>n/2</sup></span><span class="den">Γ(n/2 + 1)</span></span>
+        &nbsp;·&nbsp;r<sup>n</sup>
+      </div>
+      <div class="formula-label">the volume of an n-dimensional ball of radius r</div>
+    </div>
+    <p>Check it against the shapes everyone knows. At n = 2, Γ(2) = 1, and the formula collapses to π·r², the area of a circle. At n = 3, Γ(2.5) = <sup>3</sup>⁄<sub>4</sub>√π, and it reduces to <sup>4</sup>⁄<sub>3</sub>π·r³, the familiar volume of a sphere. The same rule that gives a circle its area gives a five-dimensional ball its volume. It simply keeps going.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow-num mono">02</div>
+    <h2>Solving it for n = 5</h2>
+    <p>Set n = 5 and the Gamma function needs one property: Γ(x + 1) = x·Γ(x). Unwinding it from Γ(7/2) down to Γ(1/2) = √π turns an abstract function into a plain fraction.</p>
+    <ol class="step-list">
+      <li>
+        <div>
+          <p>Start with the general formula at n = 5.</p>
+          <div class="formula">V<sub>5</sub>(r) = π<sup>5/2</sup> / Γ(7/2) · r<sup>5</sup></div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <p>Unwind Γ(7/2) using Γ(x+1) = x·Γ(x), three steps down to Γ(1/2).</p>
+          <div class="formula">Γ(7/2) = <sup>5</sup>⁄<sub>2</sub> · <sup>3</sup>⁄<sub>2</sub> · <sup>1</sup>⁄<sub>2</sub> · √π = <sup>15</sup>⁄<sub>8</sub>√π</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <p>Substitute back in. The √π in the numerator and denominator cancel, leaving whole numbers and π².</p>
+          <div class="formula">V<sub>5</sub>(r) = π<sup>5/2</sup> / (<sup>15</sup>⁄<sub>8</sub>√π) · r<sup>5</sup> = <sup>8</sup>⁄<sub>15</sub>π² · r<sup>5</sup></div>
+        </div>
+      </li>
+    </ol>
+    <div class="formula-block highlight">
+      <div class="formula">
+        V<sub>5</sub>(r) =
+        <span class="frac"><span class="num">8π²</span><span class="den">15</span></span>
+        · r<sup>5</sup>
+        <span class="approx">&nbsp;≈&nbsp;5.2638 · r<sup>5</sup></span>
+      </div>
+      <div class="formula-label">closed form, five dimensions</div>
+    </div>
+    <p>Differentiating with respect to r gives the four-dimensional "surface" that encloses this ball, the boundary of the five-dimensional shape: S<sub>4</sub>(r) = <sup>8</sup>⁄<sub>3</sub>π²·r⁴, about 26.319·r⁴. Both quantities grow with the fifth and fourth powers of the radius, which is why the interactive curve below climbs so fast.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap-wide">
+    <div class="eyebrow-num mono">03</div>
+    <h2>Watch it grow: V₅(r) = 8π²/15 · r⁵</h2>
+    <p style="max-width:68ch;">Move the radius. The fifth power means volume does not grow steadily, it accelerates: doubling r does not double the volume, it multiplies it by 32.</p>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="title mono">V₅(r) vs. radius</div>
+      </div>
+      <div class="readout">
+        <div>
+          <div class="stat-label mono">radius r</div>
+          <div class="stat-value mono" id="rValue">1.000</div>
+        </div>
+        <div>
+          <div class="stat-label mono">volume V₅(r)</div>
+          <div class="stat-value mono" id="vValue">5.264</div>
+        </div>
+        <div>
+          <div class="stat-label mono">boundary S₄(r)</div>
+          <div class="stat-value mono alt" id="sValue">26.319</div>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <svg class="chart" id="curveChart" viewBox="0 0 640 340" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="curveGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--violet)" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="var(--violet)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g id="gridGroup"></g>
+          <path id="curveFillPath" class="curve-fill" d=""/>
+          <path id="curvePath" class="curve-path" d="" pathLength="1"/>
+          <line id="trackerVLine" class="tracker-line" x1="0" y1="0" x2="0" y2="0"/>
+          <line id="trackerHLine" class="tracker-line" x1="0" y1="0" x2="0" y2="0"/>
+          <circle id="trackerDot" class="tracker-dot" r="5" cx="0" cy="0"/>
+          <g id="axisLabels"></g>
+        </svg>
+      </div>
+      <input type="range" id="rSlider" min="0" max="160" value="100" step="1" aria-label="Radius r">
+      <div class="slider-labels"><span>r = 0</span><span>r = 1.6</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap-wide">
+    <div class="eyebrow-num mono">04</div>
+    <h2>Why five, and not some other number</h2>
+    <p style="max-width:68ch;">Fix the radius at 1 and instead vary the dimension. Two competing forces are at work in π<sup>n/2</sup> / Γ(n/2+1): the numerator grows like an exponential, the denominator grows like a factorial. Exponentials start fast; factorials start slow but eventually overtake anything. Their tug of war produces a single hump, and it peaks at n = 5.</p>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="title mono">volume of a unit n-ball, by dimension</div>
+      </div>
+      <div class="chart-wrap">
+        <svg class="chart" id="barChart" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid meet">
+          <g id="barGroup"></g>
+        </svg>
+      </div>
+      <div class="legend-note"><span class="legend-swatch"></span> n = 5: the largest unit ball there will ever be, in any dimension</div>
+    </div>
+    <p style="margin-top:24px;">Push past five and the factorial in the denominator wins for good. By n = 10 a unit ball holds less volume than a unit ball in ordinary three-dimensional space. By n = 20 it is smaller than a grain of the volume it started with. Extra dimensions eventually cost more room than they add.</p>
+  </div>
+</section>
+
+<section class="chapter-divider" id="chapter2">
+  <div class="chapter-kicker mono">CHAPTER TWO</div>
+  <h1>Entanglement's shortcut through time</h1>
+  <p class="lede">Two particles, prepared together and then separated by any distance, stay correlated in a way ordinary space and time can't easily explain. One idea for why reshapes time itself into something like an hourglass: a single point where two distant places meet.</p>
+</section>
+
+<section class="section">
+  <div class="wrap-wide">
+    <div class="eyebrow-num mono">05</div>
+    <h2>What entanglement actually does, and doesn't, do</h2>
+    <p style="max-width:68ch;">Prepare two particles together so their properties are linked, then send them to opposite ends of the galaxy. Measure one and it lands on a result at random, spin up or spin down, there's no telling in advance. Measure the other, and it always comes out opposite. That agreement holds no matter how far apart the two are, and it shows up faster than light could have crossed the distance between them.</p>
+    <p style="max-width:68ch;">It's tempting to call that a message. It isn't. Each measurement is pure randomness, nobody gets to choose which result they see, so there's nothing to encode into it. The two people holding the particles only learn they were correlated once they compare notes afterward, over an ordinary, light-speed-limited phone call. Physicists call this the <strong>no-communication theorem</strong>: entanglement produces agreement, not a signal. It's been tested directly, with the two measurements timed so precisely that any ordinary signal would have needed to travel thousands of times faster than light to connect them, and still no usable information crossed the gap.</p>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="title mono">random on its own, matched every time</div>
+      </div>
+      <svg class="entangle-demo" viewBox="0 0 640 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g transform="translate(170,118)">
+          <circle r="72" class="dial-ring"/>
+          <line id="needleA" class="dial-needle" x1="0" y1="0" x2="0" y2="-58"/>
+          <circle class="dial-hub" r="4"/>
+          <circle id="glowA" class="dial-glow" cx="0" cy="-58" r="7"/>
+        </g>
+        <g transform="translate(470,118)">
+          <circle r="72" class="dial-ring"/>
+          <line id="needleB" class="dial-needle" x1="0" y1="0" x2="0" y2="-58"/>
+          <circle class="dial-hub" r="4"/>
+          <circle id="glowB" class="dial-glow" cx="0" cy="-58" r="7"/>
+        </g>
+        <text class="wh-label" x="170" y="26" text-anchor="middle">particle A</text>
+        <text class="wh-label" x="470" y="26" text-anchor="middle">particle B</text>
+        <text class="wh-label" id="trialLabel" x="320" y="220" text-anchor="middle">trial 1</text>
+      </svg>
+      <div class="wh-caption">Every spin lands on a new, unpredictable angle, watch it change trial to trial. But A and B always land opposite each other, and always at the same instant. That's the whole phenomenon: agreement without a message.</div>
+    </div>
+    <div class="callout">
+      <div class="callout-label mono">THE PART THAT HOLDS UP</div>
+      <p>Correlation without communication. The outcomes agree; no message travels between them. Every serious model of entanglement, including the speculative ones below, has to preserve this or it contradicts a century of experiments.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap-wide">
+    <div class="eyebrow-num mono">06</div>
+    <h2>One explanation: a wormhole in disguise</h2>
+    <p style="max-width:68ch;">In 2013, Juan Maldacena and Leonard Susskind proposed a striking conjecture, now known by its shorthand, <strong>ER = EPR</strong>. It says that two maximally entangled particles, or entangled black holes, are connected by a wormhole: a bridge through spacetime joining two distant points. Picture two funnels, mouths flared open at either end, throats narrowing until they meet at a single point in the middle, an hourglass on its side. That's close to how physicists actually draw it.</p>
+    <div class="panel wormhole-panel">
+      <div class="panel-head">
+        <div class="title mono">the ER = EPR picture, not to scale</div>
+      </div>
+      <svg class="wormhole" viewBox="0 0 640 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path class="wh-cone" d="M 30,40 C 170,40 260,105 300,128 C 260,151 170,216 30,216 Z"/>
+        <path class="wh-cone" d="M 610,40 C 470,40 380,105 340,128 C 380,151 470,216 610,216 Z"/>
+        <path class="wh-throat" d="M 300,128 C 313,118 327,118 340,128"/>
+        <path class="wh-throat" d="M 300,128 C 313,138 327,138 340,128"/>
+        <circle class="wh-glow" cx="60" cy="70" r="8"/>
+        <circle class="wh-dot" cx="60" cy="70" r="5"/>
+        <circle class="wh-glow" cx="580" cy="186" r="8" style="animation-delay:0s;"/>
+        <circle class="wh-dot" cx="580" cy="186" r="5"/>
+        <text class="wh-label" x="60" y="52" text-anchor="middle">particle A</text>
+        <text class="wh-label" x="580" y="212" text-anchor="middle">particle B</text>
+        <text class="wh-label" x="320" y="100" text-anchor="middle">throat</text>
+      </svg>
+      <div class="wh-caption">Both dots brighten together, not one after the other. The conjecture explains the correlation as geometry, a shared connection, not a signal sent from one mouth to the other.</div>
+    </div>
+    <p style="margin-top:24px; max-width:68ch;">Even inside this picture, the wormhole is not traversable. Nothing, not light, not a message, not a particle, can cross from one mouth to the other. The geometry ties the two particles' fates together without ever letting one side send the other side anything. ER = EPR is still a conjecture, actively studied and not yet confirmed, but it's taken seriously precisely because it doesn't break the no-communication rule above. It reframes entanglement as a shortcut in geometry, not a loophole in causality.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap-wide">
+    <div class="eyebrow-num mono">07</div>
+    <h2>Could an extra dimension make the delay zero</h2>
+    <p style="max-width:68ch;">Here's the more speculative layer, closer to what circulates in pop-science retellings of this idea. A handful of frontier physics papers explore models with an extra dimension, sometimes described as a hidden or "dark" layer of spacetime, where the usual speed limit doesn't apply. If information could move arbitrarily fast through that extra dimension, the proper time separating two distant points, measured through that layer, could shrink toward zero. Seen from ordinary three-dimensional space, two entangled particles a galaxy apart would look like they're sitting right next to each other through the extra dimension, even while looking impossibly far apart through the three we can walk around in.</p>
+    <div class="formula-block highlight-cyan">
+      <div class="formula" style="white-space:normal; flex-wrap:wrap;">as the extra-dimensional speed limit → ∞, the proper-time gap between A and B → 0</div>
+      <div class="formula-label">the shape of the speculative argument, not an established result</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="title mono">watching the gap close</div>
+      </div>
+      <div class="readout" style="margin-bottom:14px;">
+        <div>
+          <div class="stat-label mono">extra-dimensional speed factor, s</div>
+          <div class="stat-value mono accent-cyan" id="sFactorValue">1.0</div>
+        </div>
+        <div>
+          <div class="stat-label mono">proper-time gap (arbitrary units)</div>
+          <div class="stat-value mono" id="gapValue">1.000</div>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <svg class="timegap-chart" id="timegapChart" viewBox="0 0 640 220" preserveAspectRatio="xMidYMid meet">
+          <g id="tgGrid"></g>
+          <path id="tgCurve" class="tg-curve" d=""/>
+          <circle id="tgDotGlow" class="tg-dot-glow" r="14" cx="0" cy="0"/>
+          <circle id="tgDot" class="tg-dot" r="5" cx="0" cy="0"/>
+          <g id="tgLabels"></g>
+        </svg>
+      </div>
+      <div class="wh-caption">A toy curve, gap = 1 / s, looping on its own. As the hypothetical extra-dimensional speed limit s climbs, the modeled delay between two entangled points falls toward zero, never quite a real measurement, only the shape of the claim.</div>
+    </div>
+    <p style="max-width:68ch;">This is genuinely close to the "time as a funnel" image: two points that are far apart in the dimensions we experience, but collapsed to almost nothing in a dimension we don't. It is not, however, settled physics. These are exploratory models, not confirmed by experiment, and they don't pin the effect to any one specific dimension, "the seventh" or otherwise; that detail isn't something the literature agrees on. What every version of the idea insists on is the same rule from earlier in this chapter: even with a shortcut through extra geometry, nobody gets to send a usable message faster than light. The shortcut explains the correlation. It still doesn't hand anyone a phone line.</p>
+    <div class="callout">
+      <div class="callout-label mono accent-cyan">WHERE THIS STANDS</div>
+      <p>Entanglement and the no-communication theorem: established, tested repeatedly. ER = EPR: a serious, unconfirmed conjecture under active research. An extra dimension collapsing time to zero: a speculative extension of that idea, worth thinking about, not something to treat as textbook fact yet.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>V<sub>n</sub>(r) = π<sup>n/2</sup> / Γ(n/2+1) · r<sup>n</sup>, peak at n = 5, unit radius. Entanglement correlates instantly; it still can't send a message.</p>
+</footer>
+
+<script>
+(function(){
+  // ---------- Hero ring draw-in ----------
+  var rings = document.querySelectorAll('#ringDraw .ring, #ringFive');
+  rings.forEach(function(ring, i){
+    var r = parseFloat(ring.getAttribute('data-r'));
+    var c = 2 * Math.PI * r;
+    ring.style.strokeDasharray = c;
+    ring.style.strokeDashoffset = c;
+    ring.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1)';
+    setTimeout(function(){ ring.style.strokeDashoffset = 0; }, 160 + i * 190);
+  });
+  var five = document.getElementById('ringFive');
+  setTimeout(function(){
+    five.style.animation = 'pulseGlow 3.4s ease-in-out infinite';
+  }, 1400);
+  var styleTag = document.createElement('style');
+  styleTag.textContent = '@keyframes pulseGlow { 0%,100% { opacity: 0.65; } 50% { opacity: 1; } }';
+  document.head.appendChild(styleTag);
+
+  // ---------- Curve chart ----------
+  var svgNS = 'http://www.w3.org/2000/svg';
+  var chart = document.getElementById('curveChart');
+  var gridGroup = document.getElementById('gridGroup');
+  var axisLabels = document.getElementById('axisLabels');
+  var curvePath = document.getElementById('curvePath');
+  var curveFillPath = document.getElementById('curveFillPath');
+  var trackerDot = document.getElementById('trackerDot');
+  var trackerVLine = document.getElementById('trackerVLine');
+  var trackerHLine = document.getElementById('trackerHLine');
+  var slider = document.getElementById('rSlider');
+  var rValueEl = document.getElementById('rValue');
+  var vValueEl = document.getElementById('vValue');
+  var sValueEl = document.getElementById('sValue');
+
+  var K = 8 * Math.PI * Math.PI / 15; // coefficient for V5
+  var K_S = 8 * Math.PI * Math.PI / 3; // coefficient for S4 (dV/dr)
+
+  var padL = 56, padR = 20, padT = 20, padB = 34;
+  var plotW = 640 - padL - padR;
+  var plotH = 340 - padT - padB;
+  var rMax = 1.6;
+  var vMax = K * Math.pow(rMax, 5); // ~55.2
+
+  function xForR(r){ return padL + (r / rMax) * plotW; }
+  function yForV(v){ return padT + plotH - (v / vMax) * plotH; }
+
+  // grid + axes
+  var gridHTML = '';
+  for (var i = 0; i <= 4; i++){
+    var rv = (rMax / 4) * i;
+    var gx = xForR(rv);
+    gridHTML += '<line class="grid-line" x1="'+gx+'" y1="'+padT+'" x2="'+gx+'" y2="'+(padT+plotH)+'"></line>';
+  }
+  for (var j = 0; j <= 4; j++){
+    var vv = (vMax / 4) * j;
+    var gy = yForV(vv);
+    gridHTML += '<line class="grid-line" x1="'+padL+'" y1="'+gy+'" x2="'+(padL+plotW)+'" y2="'+gy+'"></line>';
+  }
+  gridHTML += '<line class="axis-line" x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(padL+plotW)+'" y2="'+(padT+plotH)+'"></line>';
+  gridHTML += '<line class="axis-line" x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'"></line>';
+  gridGroup.innerHTML = gridHTML;
+
+  var labelsHTML = '';
+  for (var k = 0; k <= 4; k++){
+    var rl = (rMax / 4) * k;
+    labelsHTML += '<text class="axis-label" x="'+xForR(rl)+'" y="'+(padT+plotH+18)+'" text-anchor="middle">'+rl.toFixed(1)+'</text>';
+  }
+  for (var m = 0; m <= 4; m++){
+    var vl = (vMax / 4) * m;
+    labelsHTML += '<text class="axis-label" x="'+(padL-10)+'" y="'+(yForV(vl)+3)+'" text-anchor="end">'+vl.toFixed(0)+'</text>';
+  }
+  axisLabels.innerHTML = labelsHTML;
+
+  // curve path
+  var N = 120;
+  var pts = [];
+  for (var s = 0; s <= N; s++){
+    var r = (rMax * s) / N;
+    var v = K * Math.pow(r, 5);
+    pts.push([xForR(r), yForV(v)]);
+  }
+  var d = 'M ' + pts.map(function(p){ return p[0].toFixed(2) + ' ' + p[1].toFixed(2); }).join(' L ');
+  curvePath.setAttribute('d', d);
+  var fillD = d + ' L ' + xForR(rMax).toFixed(2) + ' ' + (padT+plotH) + ' L ' + xForR(0).toFixed(2) + ' ' + (padT+plotH) + ' Z';
+  curveFillPath.setAttribute('d', fillD);
+
+  // draw-in animation for the curve
+  var len = curvePath.getTotalLength ? curvePath.getTotalLength() : 1000;
+  curvePath.style.strokeDasharray = len;
+  curvePath.style.strokeDashoffset = len;
+  curvePath.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)';
+  curveFillPath.style.opacity = 0;
+  curveFillPath.style.transition = 'opacity 1.2s ease 0.4s';
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      curvePath.style.strokeDashoffset = 0;
+      curveFillPath.style.opacity = 1;
+    }, 250);
+  });
+
+  function updateTracker(rv){
+    var v = K * Math.pow(rv, 5);
+    var sv = K_S * Math.pow(rv, 4);
+    var px = xForR(rv), py = yForV(Math.min(v, vMax));
+    trackerDot.setAttribute('cx', px);
+    trackerDot.setAttribute('cy', py);
+    trackerVLine.setAttribute('x1', px); trackerVLine.setAttribute('x2', px);
+    trackerVLine.setAttribute('y1', padT); trackerVLine.setAttribute('y2', py);
+    trackerHLine.setAttribute('x1', padL); trackerHLine.setAttribute('x2', px);
+    trackerHLine.setAttribute('y1', py); trackerHLine.setAttribute('y2', py);
+    rValueEl.textContent = rv.toFixed(3);
+    vValueEl.textContent = v.toFixed(3);
+    sValueEl.textContent = sv.toFixed(3);
+  }
+
+  slider.addEventListener('input', function(){
+    var rv = (parseFloat(slider.value) / 100);
+    updateTracker(rv);
+  });
+  updateTracker(1.0);
+
+  // ---------- Bar chart ----------
+  var barChart = document.getElementById('barChart');
+  var barGroup = document.getElementById('barGroup');
+  var data = [
+    {n:0, v:1.0}, {n:1, v:2.0}, {n:2, v:3.14159}, {n:3, v:4.18879},
+    {n:4, v:4.93480}, {n:5, v:5.26379}, {n:6, v:5.16771}, {n:7, v:4.72477},
+    {n:8, v:4.05871}, {n:9, v:3.29851}, {n:10, v:2.55016}, {n:11, v:1.88410},
+    {n:12, v:1.33526}
+  ];
+  var bpadL = 40, bpadR = 16, bpadT = 34, bpadB = 34;
+  var bw = 640 - bpadL - bpadR;
+  var bh = 320 - bpadT - bpadB;
+  var maxV = 5.5;
+  var barSlot = bw / data.length;
+  var barW = barSlot * 0.58;
+
+  var barsHTML = '';
+  data.forEach(function(d, i){
+    var x = bpadL + i * barSlot + (barSlot - barW) / 2;
+    var fullH = (d.v / maxV) * bh;
+    var y = bpadT + bh - fullH;
+    var isPeak = d.n === 5;
+    barsHTML += '<rect class="bar'+(isPeak?' peak':'')+'" data-final-y="'+y+'" data-final-h="'+fullH+'" x="'+x.toFixed(2)+'" y="'+(bpadT+bh)+'" width="'+barW.toFixed(2)+'" height="0" rx="2"></rect>';
+    barsHTML += '<text class="bar-label" x="'+(x+barW/2).toFixed(2)+'" y="'+(bpadT+bh+18)+'" text-anchor="middle">'+d.n+'</text>';
+    barsHTML += '<text class="bar-value'+(isPeak?' peak-text':'')+'" x="'+(x+barW/2).toFixed(2)+'" y="'+(y-8)+'" text-anchor="middle" data-final-y="'+(y-8)+'">'+d.v.toFixed(2)+'</text>';
+  });
+  barsHTML += '<line class="axis-line" x1="'+bpadL+'" y1="'+(bpadT+bh)+'" x2="'+(bpadL+bw)+'" y2="'+(bpadT+bh)+'"></line>';
+  barsHTML += '<text class="axis-label" x="'+bpadL+'" y="'+(bpadT-14)+'">dimension n</text>';
+  barGroup.innerHTML = barsHTML;
+
+  var animated = false;
+  function animateBars(){
+    if (animated) return;
+    animated = true;
+    var bars = barGroup.querySelectorAll('rect.bar');
+    var vals = barGroup.querySelectorAll('text.bar-value');
+    bars.forEach(function(bar, i){
+      bar.style.transition = 'y 0.7s cubic-bezier(.4,0,.2,1) ' + (i*45) + 'ms, height 0.7s cubic-bezier(.4,0,.2,1) ' + (i*45) + 'ms';
+      requestAnimationFrame(function(){
+        bar.setAttribute('y', bar.getAttribute('data-final-y'));
+        bar.setAttribute('height', bar.getAttribute('data-final-h'));
+      });
+    });
+    vals.forEach(function(t, i){
+      t.style.opacity = 0;
+      t.style.transition = 'opacity 0.5s ease ' + (300 + i*45) + 'ms';
+      requestAnimationFrame(function(){ t.style.opacity = 1; });
+    });
+  }
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ animateBars(); io.disconnect(); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(barChart);
+  } else {
+    animateBars();
+  }
+
+  // ---------- Entanglement dial demo ----------
+  var needleA = document.getElementById('needleA');
+  var needleB = document.getElementById('needleB');
+  var glowA = document.getElementById('glowA');
+  var glowB = document.getElementById('glowB');
+  var trialLabel = document.getElementById('trialLabel');
+  var trialCount = 0;
+  var spinTurns = 720; // extra full turns for a visible spin
+
+  function pointOnCircle(angleDeg, radius){
+    var rad = (angleDeg - 90) * Math.PI / 180;
+    return [radius * Math.cos(rad), radius * Math.sin(rad)];
+  }
+
+  function spinPair(){
+    trialCount++;
+    if (trialLabel) trialLabel.textContent = 'trial ' + trialCount;
+    var angle = Math.random() * 360;
+    var angleB = angle + 180;
+    needleA.style.transition = 'transform 1.15s cubic-bezier(.22,.9,.2,1)';
+    needleB.style.transition = 'transform 1.15s cubic-bezier(.22,.9,.2,1)';
+    needleA.setAttribute('transform', 'rotate(' + (spinTurns + angle) + ')');
+    needleB.setAttribute('transform', 'rotate(' + (spinTurns + angleB) + ')');
+    var tipA = pointOnCircle(angle, 58);
+    var tipB = pointOnCircle(angleB, 58);
+    setTimeout(function(){
+      if (glowA){
+        glowA.setAttribute('cx', tipA[0]); glowA.setAttribute('cy', tipA[1]);
+        glowA.classList.remove('flash'); void glowA.offsetWidth; glowA.classList.add('flash');
+      }
+      if (glowB){
+        glowB.setAttribute('cx', tipB[0]); glowB.setAttribute('cy', tipB[1]);
+        glowB.classList.remove('flash'); void glowB.offsetWidth; glowB.classList.add('flash');
+      }
+    }, 1150);
+  }
+
+  if (needleA && needleB){
+    setTimeout(spinPair, 500);
+    setInterval(spinPair, 4200);
+  }
+
+  // ---------- Proper-time gap demo (chapter two, section 07) ----------
+  var tgChart = document.getElementById('timegapChart');
+  if (tgChart){
+    var tgGrid = document.getElementById('tgGrid');
+    var tgCurve = document.getElementById('tgCurve');
+    var tgDot = document.getElementById('tgDot');
+    var tgDotGlow = document.getElementById('tgDotGlow');
+    var tgLabels = document.getElementById('tgLabels');
+    var sFactorValue = document.getElementById('sFactorValue');
+    var gapValue = document.getElementById('gapValue');
+
+    var tPadL = 46, tPadR = 16, tPadT = 16, tPadB = 30;
+    var tW = 640 - tPadL - tPadR;
+    var tH = 220 - tPadT - tPadB;
+    var sMin = 1, sMax = 40;
+
+    function txForS(s){ return tPadL + ((s - sMin) / (sMax - sMin)) * tW; }
+    function tyForGap(g){ return tPadT + tH - g * tH; } // gap already normalized 0..1
+
+    var tgGridHTML = '';
+    for (var gi = 0; gi <= 4; gi++){
+      var gx = tPadL + (tW / 4) * gi;
+      tgGridHTML += '<line class="grid-line" x1="'+gx+'" y1="'+tPadT+'" x2="'+gx+'" y2="'+(tPadT+tH)+'"></line>';
+    }
+    for (var gj = 0; gj <= 3; gj++){
+      var gy = tPadT + (tH / 3) * gj;
+      tgGridHTML += '<line class="grid-line" x1="'+tPadL+'" y1="'+gy+'" x2="'+(tPadL+tW)+'" y2="'+gy+'"></line>';
+    }
+    tgGridHTML += '<line class="axis-line" x1="'+tPadL+'" y1="'+(tPadT+tH)+'" x2="'+(tPadL+tW)+'" y2="'+(tPadT+tH)+'"></line>';
+    tgGridHTML += '<line class="axis-line" x1="'+tPadL+'" y1="'+tPadT+'" x2="'+tPadL+'" y2="'+(tPadT+tH)+'"></line>';
+    tgGrid.innerHTML = tgGridHTML;
+
+    var tgLabelsHTML = '';
+    tgLabelsHTML += '<text class="axis-label" x="'+tPadL+'" y="'+(tPadT+tH+20)+'">s = 1</text>';
+    tgLabelsHTML += '<text class="axis-label" x="'+(tPadL+tW)+'" y="'+(tPadT+tH+20)+'" text-anchor="end">s = 40</text>';
+    tgLabelsHTML += '<text class="axis-label" x="'+(tPadL-8)+'" y="'+(tPadT+6)+'" text-anchor="end">gap = 1</text>';
+    tgLabelsHTML += '<text class="axis-label" x="'+(tPadL-8)+'" y="'+(tPadT+tH)+'" text-anchor="end">gap → 0</text>';
+    tgLabels.innerHTML = tgLabelsHTML;
+
+    var tgN = 100;
+    var tgPts = [];
+    for (var ti = 0; ti <= tgN; ti++){
+      var s = sMin + ((sMax - sMin) * ti) / tgN;
+      var gapNorm = (1 / s); // s=1 -> 1, s=40 -> 0.025
+      tgPts.push([txForS(s), tyForGap(gapNorm)]);
+    }
+    var tgD = 'M ' + tgPts.map(function(p){ return p[0].toFixed(2) + ' ' + p[1].toFixed(2); }).join(' L ');
+    tgCurve.setAttribute('d', tgD);
+
+    var tgLen = tgCurve.getTotalLength ? tgCurve.getTotalLength() : 800;
+    tgCurve.style.strokeDasharray = tgLen;
+    tgCurve.style.strokeDashoffset = tgLen;
+    tgCurve.style.transition = 'stroke-dashoffset 1.4s ease';
+    requestAnimationFrame(function(){
+      setTimeout(function(){ tgCurve.style.strokeDashoffset = 0; }, 200);
+    });
+
+    var loopDuration = 4600; // ms per full sweep
+    var startTime = null;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function tgFrame(ts){
+      if (startTime === null) startTime = ts;
+      var elapsed = (ts - startTime) % loopDuration;
+      var progress = elapsed / loopDuration; // 0..1
+      var s = sMin + (sMax - sMin) * progress;
+      var gapNorm = 1 / s;
+      var px = txForS(s), py = tyForGap(gapNorm);
+      tgDot.setAttribute('cx', px); tgDot.setAttribute('cy', py);
+      tgDotGlow.setAttribute('cx', px); tgDotGlow.setAttribute('cy', py);
+      if (sFactorValue) sFactorValue.textContent = s.toFixed(1);
+      if (gapValue) gapValue.textContent = gapNorm.toFixed(3);
+      requestAnimationFrame(tgFrame);
+    }
+    if (reduceMotion){
+      var s0 = sMin;
+      tgDot.setAttribute('cx', txForS(s0)); tgDot.setAttribute('cy', tyForGap(1/s0));
+      tgDotGlow.setAttribute('cx', txForS(s0)); tgDotGlow.setAttribute('cy', tyForGap(1/s0));
+      if (sFactorValue) sFactorValue.textContent = s0.toFixed(1);
+      if (gapValue) gapValue.textContent = (1/s0).toFixed(3);
+    } else {
+      requestAnimationFrame(tgFrame);
+    }
+  }
+})();
+</script>
+</body>
+</html>
